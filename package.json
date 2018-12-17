@@ -1,0 +1,29 @@
+{
+  "name": "nodeproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"cd front && npm run serve\" \"cd back && nodemon --harmony index.js\"",
+    "build": "cd front && npm run build && cd .. && node build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weichaozhan/nodeProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/weichaozhan/nodeProject/issues"
+  },
+  "homepage": "https://github.com/weichaozhan/nodeProject#readme",
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
+    "nodemon": "^1.18.9"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1"
+  }
+}
