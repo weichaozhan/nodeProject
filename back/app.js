@@ -7,6 +7,8 @@ import connectMongo from 'connect-mongo';
 import history from 'connect-history-api-fallback';
 import chalk from 'chalk';
 
+import './mongodb';
+
 const app = express();
 const config = configLite({
     config_basedir: __dirname,

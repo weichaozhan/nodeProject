@@ -2,7 +2,7 @@
 
 module.exports = {
 	port: parseInt(process.env.PORT, 10) || 3000,
-	url: 'mongodb://localhost:27017/elm',
+	url: 'mongodb://localhost:27017/nodeProject',
 	session: {
 		name: 'SID',
 		secret: 'SID',
