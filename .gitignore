@@ -1,3 +1,4 @@
 **/node_modules/**
-./back/public/**
+back/public/html
+back/public/files
 **/dist/**
