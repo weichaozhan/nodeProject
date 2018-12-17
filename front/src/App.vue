@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import HelloWorld from './components/HelloWorld.vue'
 
 export default {
@@ -15,10 +14,6 @@ export default {
     HelloWorld
   },
   mounted() {
-    axios.get('/helloworld')
-      .then(res => {
-        console.log('res', res)
-      })
   }
 }
 </script>
