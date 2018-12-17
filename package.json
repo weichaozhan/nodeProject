@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"cd front && npm run serve\" \"cd back && nodemon --harmony index.js\"",
+    "dev": "concurrently \"cd front && npm run serve\" \"cd back && npm run start\"",
     "build": "cd front && npm run build && cd .. && node build.js"
   },
   "repository": {
