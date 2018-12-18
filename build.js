@@ -17,7 +17,7 @@ function copyDir(src, dist, callback) {
         } else {
             fs.readdir(src, function (err, paths) {
                 if (err) {
-                    callback(err)
+                    callback(err);
                 } else {
                     if (/node_modules/g.test(src)) return;
 
@@ -35,7 +35,7 @@ function copyDir(src, dist, callback) {
                                         fs.writeFileSync(_dist, fs.readFileSync(_src));
                                     } else if (stat.isDirectory()) {
                                         // 当是目录是，递归复制
-                                        copyDir(_src, _dist, callback)
+                                        copyDir(_src, _dist, callback);
                                     }
                                 }
                             })
@@ -63,5 +63,5 @@ function deleteall(path) {
 	}
 };
 
-deleteall('./dist')
-copyDir('./back', './dist')
+deleteall('./dist');
+copyDir('./back', './dist');

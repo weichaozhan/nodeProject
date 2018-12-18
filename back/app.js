@@ -4,8 +4,9 @@ import router from './routes/index.js';
 import cookieParser from 'cookie-parser'
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
-import history from 'connect-history-api-fallback';
 import chalk from 'chalk';
+import cors from 'cors';
+import bodyParser  from 'body-parser';
 
 import './mongodb';
 
@@ -15,6 +16,13 @@ const config = configLite({
     config_dir: 'config'
 });
 const MongoStore = connectMongo(session);
+
+app.use(cors({
+    origin: '*',
+}));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 app.use(session({
@@ -27,9 +35,6 @@ app.use(session({
 }));
 
 router(app);
-
-app.use(history());
-app.use(express.static('./public'));
 app.listen(config.port, () => {
     console.log(chalk.green(`成功监听端口：${config.port}`));
 });

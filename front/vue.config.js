@@ -14,7 +14,7 @@ function addStyleResource(rule) {
 }
 
 module.exports = {
-    baseUrl: './',
+    baseUrl: isProduction ? '/html' : '/',
     devServer: {
         port: 3001,
         open: true,
