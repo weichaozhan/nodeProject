@@ -17,7 +17,7 @@ function send404(res, err) {
     res.writeHead(404, {
         'Content-Type': 'text/html'
     });
-    res.end(JSON.stringify(err));
+    res.end(new Error(err).toString());
 }
 
 /**
@@ -58,7 +58,7 @@ function serveStatic(res, cache, absPath, callback) {
                 if (exists) {
                     fs.readFile(absPath, function(err, data) {
                         if (err) {
-                            console.log(exists, absPath)
+                            console.log(err)
                             send404(res, err);
                         } else {
                             cache[absPath] = data
@@ -70,7 +70,6 @@ function serveStatic(res, cache, absPath, callback) {
                     if (callback) {
                         callback()
                     } else {
-                        console.log(exists, absPath)
                         send404(res, 'Not Found');
                     }
                 }
@@ -81,5 +80,7 @@ function serveStatic(res, cache, absPath, callback) {
 }
 
 export default (res, absPath, callback) => {
-    serveStatic(res, cache, absPath, callback);
+    const absPathDecode = decodeURI(absPath);
+    
+    serveStatic(res, cache, absPathDecode, callback);
 };

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --harmony index.js"
+    "start": "cross-env ENV_ORIGIN=http://localhost:3000 NODE_ENV=development nodemon --harmony index.js",
+    "deploy": "cross-env ENV_ORIGIN=http://localhost:3000 nodemon --harmony index.js"
   },
   "author": "",
   "license": "ISC",

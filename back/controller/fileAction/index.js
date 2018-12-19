@@ -1,13 +1,15 @@
 import multer from 'multer';
 import path from 'path';
 
+import serveStatic from '../../prototype/staticFileRead';
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.resolve(__dirname, '../../public/files'))
     },
     filename: function (req, file, cb) {
         const nemeArr = file.originalname.split('.');
-        cb(null, `${nemeArr[0]}${Date.now()}.${nemeArr[1]}`);
+        cb(null, `${nemeArr.slice(0, -1).join('.')}_${Date.now()}.${nemeArr[nemeArr.length - 1]}`);
     }
 })
 const upload = multer({
@@ -16,10 +18,16 @@ const upload = multer({
 
 class FileAction {
     getFile(req, res, next) {
-        res.send({
-			status: '1000000',
-			message: '获取成功！',
-		})
+        if (req.url === '/') {
+            res
+                .status(404)
+                .end(new Error('Not Found').toString());
+        } else {
+            let filePath = path.resolve(__dirname, `../../public/files${req.url}`);
+            let absPath = filePath.replace(/\?+\S*/, '');
+    
+            serveStatic(res, absPath);
+        }
     }
 
     uploadFile(req, res, next) {
@@ -34,6 +42,7 @@ class FileAction {
             
             res.send({
                 filename: req.file.filename,
+                path: `${process.env.ENV_ORIGIN}/api/fileAction/${req.file.filename}`,
             });
         });
     }
