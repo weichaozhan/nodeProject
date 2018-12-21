@@ -8,9 +8,6 @@ import {
 export default new GraphQLObjectType({
     name: 'Demo',
     fields: {
-        _id: {
-            type: new GraphQLNonNull(GraphQLID),
-        },
         id: {
             type: GraphQLID,
         },

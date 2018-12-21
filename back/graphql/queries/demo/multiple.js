@@ -22,9 +22,9 @@ export default {
     },
     resolve(root, params, ctx, options) {
         return DemoModel
-                    .find({
-                        ...params,
-                    })
-                    .exec();
+                .find({
+                    ...params,
+                })
+                .exec();
     },
 };

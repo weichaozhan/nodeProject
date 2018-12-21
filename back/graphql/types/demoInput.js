@@ -7,12 +7,6 @@ import {
 export default new GraphQLInputObjectType({
     name: 'DemoInput',
     fields: {
-        _id: {
-            type: GraphQLID,
-        },
-        id: {
-            type: GraphQLID,
-        },
         name: {
             type: GraphQLString,
         },
