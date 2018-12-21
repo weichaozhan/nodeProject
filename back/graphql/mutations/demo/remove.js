@@ -9,8 +9,8 @@ import ResMsgType from '../../types/resMsg';
 export default {
     type: ResMsgType,
     args: {
-        _id: {
-            name: '_id',
+        id: {
+            name: 'id',
             type: new GraphQLNonNull(GraphQLID),
         },
     },
@@ -23,13 +23,13 @@ export default {
         try {
             await DemoModel
                 .find({
-                    _id: params._id,
+                    id: params.id,
                 }, (err, data) => {
                     if (err) throw err;
 
                     if (data.length === 0) {
                         resData.code = 1000004;
-                        resData.msg = `Not Found _id "${params._id}"`;
+                        resData.msg = `Not Found id "${params.id}"`;
                     }
                 })
                 .remove()

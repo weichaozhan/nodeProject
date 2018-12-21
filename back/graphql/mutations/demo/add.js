@@ -7,6 +7,8 @@ import {
     GraphQLNonNull,
 } from 'graphql';
 
+import {ERR_CODE} from '../../../prototype/constant';
+
 import demoInputType from '../../types/demoInput';
 import ResMsgType from '../../types/resMsg';
 
@@ -23,7 +25,7 @@ export default {
     async resolve(root, params, options) {
         const demoModel = new DemoModel(params.data);
         const resMsg = {
-            code: '1000000',
+            code: ERR_CODE.SUCCESS,
             msg: 'Add Success!',
         };
 
@@ -34,8 +36,8 @@ export default {
                 demoModel.save((err, product) => {
                     if (err) {
                         console.log(err);
-                        
-                        resMsg.code = '2000000';
+
+                        resMsg.code = ERR_CODE.TOKEN_ERR;
                         resMsg.msg = 'Server Error';
                         reject();
                     } else {

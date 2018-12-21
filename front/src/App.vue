@@ -1,36 +1,26 @@
 <template>
   <div id="app">
-    <input type="file" ref="file" @change="fileChange" />
-    <button @click="handleClick">提交</button>
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <graph-demo></graph-demo>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from './components/HelloWorld.vue';
+import GraphDemo from './components/GraphDemo.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    HelloWorld,
+    GraphDemo,
   },
   data() {
     return {
-      file: null,
     };
   },
   methods: {
-    fileChange(e) {
-      this.file = e.currentTarget.files[0];
-    },
-    handleClick() {
-      const form = new FormData();
-
-      form.append('file', this.file);
-      axios.post('/api/fileAction', form);
-    }
   },
   mounted() {
   }
