@@ -4,14 +4,14 @@
             <input type="file" ref="file" @change="fileChange" />
             <button @click="handleClick">提交</button>
         </div>
-        <from>
+        <form>
             <label>
                 姓名：<input v-model="form.name" />
             </label>
             <label>
                 性别：<input v-model="form.sex" />
             </label>
-        </from>
+        </form>
         <button @click="addDemo">添加</button>
         <table>
             <thead>
