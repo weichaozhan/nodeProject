@@ -1,5 +1,6 @@
 import multer from 'multer';
 import path from 'path';
+import fs from 'fs';
 
 import serveStatic from '../../prototype/staticFileRead';
 
@@ -31,19 +32,35 @@ class FileAction {
     }
 
     uploadFile(req, res, next) {
-        upload.single('file')(req, res, function(err) {
-            if (err instanceof multer.MulterError) {
-                console.log(err);
-                res.end('multer.MulterError');
-            } else if (err) {
-                console.log(err);
-                res.end('Node Error');
-            }
-            
-            res.send({
-                filename: req.file.filename,
-                path: `${process.env.ENV_ORIGIN}/api/fileAction/${req.file.filename}`,
-            });
+        fs.stat(path.resolve(__dirname, '../../public/files'), (err) => {
+            new Promise((resolve, reject) => {
+                if (err) {
+                    fs.mkdir(path.resolve(__dirname, '../../public/files'), { recursive: true }, (err) => {
+                        if (err) throw err;
+                        resolve();
+                    });
+                } else {
+                    resolve();
+                }
+            })
+                .then(() => {
+                    upload.single('file')(req, res, function(err) {
+                        if (err instanceof multer.MulterError) {
+                            console.log(err);
+                            res.end('multer.MulterError');
+                        } else if (err) {
+                            console.log(err);
+                            res.end('Node Error');
+                        }
+                        res.send({
+                            filename: 'a',
+                            // path: `${process.env.ENV_ORIGIN}/api/fileAction/${req.file.filename}`,
+                        });
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         });
     }
 };
